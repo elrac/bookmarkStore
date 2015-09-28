@@ -1,0 +1,8 @@
+*.db
+bash.sh
+docker.properties
+dockerBuild.sh
+Dockerfile
+dockerRun.sh
+npm.sh
+node_modules
