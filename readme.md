@@ -8,5 +8,5 @@ run the following
 ```
 1. To run
 ```
-./npm.sh start
+npm start
 ```
