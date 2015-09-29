@@ -13,9 +13,9 @@ server.use(restify.bodyParser({
   mapParams:false
 }));
 
-var resources = ['./bookmarkResource.js'];
+var resources = ['./staticResource.js','./bookmarkResource.js'];
 
-resources.forEach(item => require(item).setup(server,db));
+resources.forEach(item => require(item).setup(server,db, restify));
 
 server.listen({port:80,host:"127.0.0.2"}, function() {
   console.log('%s listening at %s', server.name, server.url);
