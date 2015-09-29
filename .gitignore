@@ -6,3 +6,4 @@ Dockerfile
 dockerRun.sh
 npm.sh
 node_modules
+*.log
