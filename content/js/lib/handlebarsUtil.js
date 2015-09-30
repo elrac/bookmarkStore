@@ -9,6 +9,7 @@
 * Partial example:
 * <script id="myPartial" class="partial" type="text/html">
 *
+* This also calls the hbHelpers script to add any helper functions defined there.
 */
 define(["jquery", "handlebars","hbHelpers"],
 	function($, hb,addHelpers) {
