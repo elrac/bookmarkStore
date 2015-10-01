@@ -41,9 +41,9 @@ define(["jquery", "handlebars","hbHelpers"],
 		*		@param  The data to display in the template. This can also be a promise that resolves to the data
 		* 	@return A promise that will resolve when the content is displayed. Resolves to the model used for display.
 		*/
-		hbUtil.prepare = function(templateSelector,elementSelector){
+		hbUtil.prepare = function(templateSelector,elementSelector, options){
 			return function(data){
-				return hbUtil.display(templateSelector,data,elementSelector);
+				return hbUtil.display(templateSelector,data,elementSelector, options);
 			}
 		}
 
@@ -51,16 +51,45 @@ define(["jquery", "handlebars","hbHelpers"],
 		* Display a partial in a tag.
 		* @param templateSelector A selector for the template to render
 		* @param data The data to display in the template. This can also be a promise that resolves to the data
-		* @param elementSelector The element in which to display the rendered template
+		* @param elementSelector The element in which to display the rendered template. This can be a string selector or a jquery object
+		* @param options
+		*		position: append|prepend|before|after|replace|contents default contents
+		*			designates the location where the redered content will be placed
+		*			reletive to the selected element
 		* @return A promise that will resolve when the content is displayed. Resolves to the model used for display.
 		*/
-		hbUtil.display = function(templateSelector,data,elementSelector){
+		hbUtil.display = function(templateSelector,data,elementSelector, options){
+			if(!options){
+				options = {};
+			}
 			return Promise.resolve(data)
 			.then(function(model){
 				var raw = $(templateSelector).html();
 				var comp = hb.compile(raw);
 				var html = comp(model);
-				$(elementSelector).html(html);
+
+				switch(options.position){
+					case 'append':
+						$(elementSelector).append(html);
+						break;
+					case 'prepend':
+						$(elementSelector).prepend(html);
+						break;
+					case 'before':
+						$(elementSelector).before(html);
+						break;
+					case 'after':
+						$(elementSelector).after(html);
+						break;
+					case 'replace':
+						$(elementSelector).replaceWith(html);
+						break;
+					case 'contents':
+					default:
+						$(elementSelector).html(html);
+						break;
+				}
+
 				return model;
 			});
 		}

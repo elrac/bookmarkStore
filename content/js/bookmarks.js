@@ -1,4 +1,4 @@
-requirejs(['jquery','handlebarsUtil'],
+requirejs(['jquery','handlebarsUtil','ajaxForm'],
 function($,hb){
 
 });

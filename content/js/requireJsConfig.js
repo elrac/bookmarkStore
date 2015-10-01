@@ -3,7 +3,8 @@ var require = {
     paths:{
       'jquery':'ext/jquery',
       'handlebars':'ext/handlebars',
-      'main':'..'
+      'form2js':'ext/form2js',
+      'main':'../'
     }
 };
 

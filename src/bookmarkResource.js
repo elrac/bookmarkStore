@@ -1,6 +1,7 @@
 exports.setup = function(server, db){
 
   var getBookmarks = function(req,res,next){
+    console.log('getting all bookmarks');
     db.all('select * from bookmark',function(err, data){
       console.log(data);
       res.send(data);

@@ -1,6 +1,11 @@
 <html>
 <body>
-this is bookmarks.html
+<form id="newBookmarkForm" action="/bookmarks" class="ajax-form" >
+  title<input type='text' name='title'></input><br/>
+  url<input type='text' name='url'></input><br/>
+  description<input type='text' name='description'></input><br/>
+  <button>Make new bookmark</button>
+</form>
 
 <script src="js/requireJsConfig.js"></script>
 <script data-main="main/bookmarks.js" src="js/lib/ext/require.js"></script>
