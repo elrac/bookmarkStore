@@ -6,6 +6,41 @@
   description<input type='text' name='description'></input><br/>
   <button>Make new bookmark</button>
 </form>
+<div id='updateFormContainer'>
+
+</div>
+<ul id="bookmarkList">
+
+</ul>
+
+<script id="editButtonPartial" class="partial" type="text/html">
+<button type='button' class='ajax-button showEdit' data-action="bookmarks/{{bookmark_id}}" data-method="GET">edit</button>
+</script>
+
+<script id="listItem" class="partial" type="text/html">
+  <li data-id="{{bookmark_id}}">
+    <span>{{title}}</span>
+    <a href="{{url}}">{{url}}</a>
+    <span>{{description}}</span>
+    <button class="ajax-button bookmarkDeleteButton" data-action="bookmarks/{{bookmark_id}}" data-method="DELETE">delete</button>
+    {{> editButtonPartial}}
+  </li>
+</script>
+
+<script id="bookmarksListTemplate" type="text/html">
+  {{#each this}}
+      {{> listItem}}
+  {{/each}}
+</script>
+
+<script id="bookmarkUpdateFormTemplate" type="text/html">
+  <form class="ajax-form updateBookmarkForm updateBookmarkFormContainer" action="/bookmarks/{{bookmark_id}}" class="ajax-form" >
+    title<input type='text' name='title' value='{{title}}'></input><br/>
+    url<input type='text' name='url' value='{{url}}'></input><br/>
+    description<input type='text' name='description' value='{{description}}'></input><br/>
+    <button>Update</button><button type='button' class='cancelEditButton' data-id={{bookmark_id}}>Cancel</button>
+  </form>
+</script>
 
 <script src="js/requireJsConfig.js"></script>
 <script data-main="main/bookmarks.js" src="js/lib/ext/require.js"></script>

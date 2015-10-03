@@ -2,7 +2,7 @@ exports.setup = function(server, db){
 
   var getBookmarks = function(req,res,next){
     console.log('getting all bookmarks');
-    db.all('select * from bookmark',function(err, data){
+    db.all('select * from bookmark order by bookmark_id desc',function(err, data){
       console.log(data);
       res.send(data);
       next();
@@ -124,10 +124,18 @@ exports.setup = function(server, db){
 
   server.del('/bookmarks/:bookmarkId',deleteBookmark);
 
-  server.get(/\/db\/(.*)/,function(req,res,next){
-    console.log(req.params);
-    res.send(req.params);
-    next();
-  });
+  var getBookmark = function(req,res,next){
+    console.log('getting all bookmarks');
+    db.get('select * from bookmark WHERE bookmark_id = $id',{$id:req.params.bookmarkId},
+    function(err, data){
+      console.log(data);
+      res.send(data);
+      next();
+    });
+  }
+
+  server.get('/bookmarks/:bookmarkId',getBookmark);
+
+
 
 }

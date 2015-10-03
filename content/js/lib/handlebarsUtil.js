@@ -42,7 +42,15 @@ define(["jquery", "handlebars","hbHelpers"],
 		* 	@return A promise that will resolve when the content is displayed. Resolves to the model used for display.
 		*/
 		hbUtil.prepare = function(templateSelector,elementSelector, options){
+			if(!options){
+				options = {};
+			}
 			return function(data){
+
+				if(options.dataIndex){
+					data = arguments[options.dataIndex];
+					console.log('displaying with',data);
+				}
 				return hbUtil.display(templateSelector,data,elementSelector, options);
 			}
 		}
